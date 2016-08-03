@@ -24,7 +24,9 @@ function fetch(url) {
     console.log('push');
     if (ms.readyState === 'open') {
       sb.appendBuffer(xhr.response);
-      console.log(sb.buffered);
+      sb.addEventListener('updateend', function() {
+        console.log(sb.buffered);
+      });
     } else {
       ms.addEventListener('sourceopen', function() {
         console.log('openagain');
