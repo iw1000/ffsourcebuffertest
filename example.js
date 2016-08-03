@@ -26,7 +26,11 @@ function fetch(url) {
     console.log('push');
     if (ms.readyState === 'open') {
       console.log(xhr.response, xhr.response.byteLength);
-      sb.appendBuffer(xhr.response);
+      try {
+        sb.appendBuffer(xhr.response);
+      } catch (e) {
+        console.log('error', e);
+      }
       sb.addEventListener('updateend', function() {
         console.log(sb.buffered);
       });
