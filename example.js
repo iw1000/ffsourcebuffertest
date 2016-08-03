@@ -26,7 +26,7 @@ function sourceOpen(_) {
         fetch(queue.shift(), function(buf) {
           sb.appendBuffer(buf);
           console.log(sb.buffered);
-        }
+        });
       }
       ms.endOfStream();
       video.play();
