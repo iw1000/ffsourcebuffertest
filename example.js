@@ -12,17 +12,7 @@ function example() {
     sb = ms.addSourceBuffer(mimeCodec);
     fetch('fftest/10154354781949643-7894420.m4v');
     fetch('fftest/10154354781949643-7895421.m4v');
-    fetch('fftest/10154354781949643-7896422.m4v');
-    while (true) {
-      console.log('while loop');
-      setTimeout(function() {
-        if (queue.length > 0 && !sb.updating && ms.readyState === 'open') {
-          console.log('append');
-          sb.appendBuffer(queue.shift());
-          console.log(sb.buffered);
-        }
-      }, 1000);
-    }
+    // fetch('fftest/10154354781949643-7896422.m4v');
   }, false);
 }
 
@@ -32,7 +22,14 @@ function fetch(url) {
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
     console.log('push');
-    queue.push(xhr.response);
+    if (ms.readyState === 'open') {
+      sb.appendBuffer(xhr.response);
+      console.log(sb.buffered);
+    } else {
+      ms.addEventListener('sourceopen', function() {
+        console.log('openagain');
+      });
+    }
   };
   xhr.send();
 }
