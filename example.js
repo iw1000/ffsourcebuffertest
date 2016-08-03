@@ -5,6 +5,7 @@ function example() {
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', function() {
     console.log('open');
+    debugger;
     fetch('fftest/10154354781949643-7894420.m4v');
   });
 }
