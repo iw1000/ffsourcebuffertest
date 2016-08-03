@@ -14,11 +14,14 @@ function example() {
     fetch('fftest/10154354781949643-7895421.m4v');
     fetch('fftest/10154354781949643-7896422.m4v');
     while (true) {
-      if (queue.length > 0 && !sb.updating && ms.readyState === 'open') {
-        console.log('append');
-        sb.appendBuffer(queue.shift());
-        console.log(sb.buffered);
-      }     
+      console.log('while loop');
+      setTimeout(function() {
+        if (queue.length > 0 && !sb.updating && ms.readyState === 'open') {
+          console.log('append');
+          sb.appendBuffer(queue.shift());
+          console.log(sb.buffered);
+        }
+      }, 1000);
     }
   }, false);
 }
