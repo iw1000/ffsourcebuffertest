@@ -23,8 +23,8 @@ function fetch(url) {
     queue.push(xhr.response);
     sb.appendBuffer(xhr.response);
     sb.addEventListener('updateend', function() {
-      console.log(sb.buffered, queue[0].byteLength);
-      fetch('fftest/10154354781949643-7895421.m4v');
+      console.log(sb.buffered, sb.buffered.start(0), sb.buffered.end(0));
+      // fetch('fftest/10154354781949643-7895421.m4v');
     });
   };
   xhr.send();
