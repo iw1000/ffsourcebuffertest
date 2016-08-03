@@ -13,8 +13,8 @@ function fetch(url) {
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    console.log(xhr.response, xhr.response.length);
-  }
+    console.log(this, xhr.response, xhr.response.length);
+  }.bind(this);
   xhr.send();
 }
 
