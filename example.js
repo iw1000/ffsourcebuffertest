@@ -1,8 +1,8 @@
 var ms;
-
+var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+ 
 function example() {
-  var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-  ms = new MediaSource;
+ ms = new MediaSource;
   var video = document.querySelector('video');
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', function() {
@@ -17,8 +17,9 @@ function fetch(url) {
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    ms.appendBuffer(xhr.response);
-    console.log(ms.buffered);
+    var sb = ms.addSourceBuffer(mimeCodec);
+    sb.appendBuffer(xhr.response);
+    console.log(sb.buffered);
   };
   xhr.send();
 }
