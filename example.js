@@ -14,6 +14,7 @@ function example() {
     fetch('fftest/10154354781949643-7896422.m4v');
     sb.addEventListener('updateend', function() {
       console.log('updateend', queue);
+      sb.appendBuffer(queue.shift());
     });
   });
 }
@@ -24,8 +25,9 @@ function fetch(url) {
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
     queue.push(xhr.response);
-    // sb.appendBuffer(xhr.response);
-    // console.log(sb.buffered);
+    if (ms.readyState === 'open') {
+      sb.appendBuffer(queue.shift());
+    }
   };
   xhr.send();
 }
