@@ -27,7 +27,7 @@ function fetch(url) {
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    if (sb.updating || queue.length > 0) {
+    if (sb.updating || queue.length > 0 || ms.readyState === 'closed') {
       queue.push(xhr.response);
     } else {
       sb.appendBuffer(xhr.response);
