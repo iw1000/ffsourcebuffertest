@@ -4,6 +4,7 @@ function example() {
   var video = document.querySelector('video');
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', function() {
+    debugger;
     fetch('fftest/10154354781949643-7894420.m4v');
   }.bind(this));
 }
