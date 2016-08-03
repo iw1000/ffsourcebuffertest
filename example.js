@@ -12,15 +12,6 @@ function example() {
     fetch('fftest/10154354781949643-7894420.m4v');
     // fetch('fftest/10154354781949643-7895421.m4v');
     // fetch('fftest/10154354781949643-7896422.m4v');
-    /**
-    sb.addEventListener('updateend', function() {
-      if (ms.readyState === 'open') {
-        debugger;
-        console.log('updateend', queue);
-        sb.appendBuffer(queue.shift());
-      }
-    });
-    **/
   });
 }
 
@@ -31,7 +22,10 @@ function fetch(url) {
   xhr.onload = function() {
     queue.push(xhr.response);
     sb.appendBuffer(queue.shift());
-    debugger;
+    sb.addEventListener('updateend', function() {
+      console.log(sb.buffered);
+      debugger;
+    });
   };
   xhr.send();
 }
