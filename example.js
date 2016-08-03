@@ -11,9 +11,8 @@ function example() {
     video.play();
     console.log('open');
     sb = ms.addSourceBuffer(mimeCodec);
-    fetch('fftest/check0.mp4');
-    fetch('fftest/check1.mp4');
-    // fetch('fftest/10154354781949643-7894420.m4v');
+    fetch('fftest/10154354781949643-init.m4v');
+    fetch('fftest/10154354781949643-7894420.m4v');
     // fetch('fftest/10154354781949643-7895421.m4v');
     // fetch('fftest/10154354781949643-7896422.m4v');
   }, false);
