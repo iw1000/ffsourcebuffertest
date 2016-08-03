@@ -8,11 +8,18 @@ function example() {
   var video = document.querySelector('video');
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', function() {
+    console.log('open');
     sb = ms.addSourceBuffer(mimeCodec);
     fetch('fftest/10154354781949643-7894420.m4v');
-    // fetch('fftest/10154354781949643-7895421.m4v');
-    // fetch('fftest/10154354781949643-7896422.m4v');
-  });
+    fetch('fftest/10154354781949643-7895421.m4v');
+    fetch('fftest/10154354781949643-7896422.m4v');
+    sb.addEventListener('update', function() {
+      if (queue.length > 0 && !sb.updating) {
+        sb.appendBuffer(queue.shift());
+        console.log(sb.buffered);
+      }
+    });
+  }, false);
 }
 
 function fetch(url) {
@@ -21,11 +28,11 @@ function fetch(url) {
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
     queue.push(xhr.response);
-    sb.appendBuffer(xhr.response);
-    sb.addEventListener('updateend', function() {
-      console.log(sb.buffered, sb.buffered.start(0), sb.buffered.end(0));
-      // fetch('fftest/10154354781949643-7895421.m4v');
-    });
+    if (sb.updating || queue.length > 0) {
+      queue.push(xhr.response);
+    } else {
+      sb.appendBuffer(xhr.response);
+    }
   };
   xhr.send();
 }
