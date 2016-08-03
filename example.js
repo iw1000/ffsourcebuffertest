@@ -22,14 +22,14 @@ function sourceOpen(_) {
   fetch(queue.shift(), function(buf) {
     sb.addEventListener('updateend', function(_) {
       console.log('updateend', queue);
+      ms.endOfStream();
+      video.play();
       if (queue.length > 0) {
         fetch(queue.shift(), function(buf) {
           sb.appendBuffer(buf);
           console.log(sb.buffered);
         });
       }
-      ms.endOfStream();
-      video.play();
     });
     console.log('appendbuffer');
     sb.appendBuffer(buf);
