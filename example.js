@@ -23,7 +23,7 @@ function fetch(url) {
   xhr.onload = function() {
     console.log('push');
     if (ms.readyState === 'open') {
-      sb.appendBuffer(xhr.response);
+      sb.appendBuffer(new ArrayBuffer(8));
       sb.addEventListener('updateend', function() {
         console.log(sb.buffered);
       });
