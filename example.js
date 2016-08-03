@@ -8,6 +8,7 @@ function example() {
   var video = document.querySelector('video');
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', function() {
+    video.play();
     console.log('open');
     sb = ms.addSourceBuffer(mimeCodec);
     fetch('fftest/check0.mp4');
