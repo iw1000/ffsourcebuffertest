@@ -21,6 +21,13 @@ function sourceOpen(_) {
   sb = ms.addSourceBuffer(mimeCodec);
   fetch(queue.shift(), function(buf) {
     sb.addEventListener('updateend', function(_) {
+      console.log('updateend', queue);
+      if (queue.length > 0) {
+        fetch(queue.shift(), function(buf) {
+          sb.appendBuffer(buf);
+          console.log(sb.buffered);
+        }
+      }
       ms.endOfStream();
       video.play();
     });
