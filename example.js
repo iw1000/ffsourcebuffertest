@@ -4,8 +4,6 @@ function example() {
   var video = document.querySelector('video');
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', function() {
-    console.log('open');
-    debugger;
     fetch('fftest/10154354781949643-7894420.m4v');
   });
 }
@@ -15,7 +13,7 @@ function fetch(url) {
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    console.log(xhr.response);
+    console.log(xhr.response, xhr.response.length);
   }
   xhr.send();
 }
