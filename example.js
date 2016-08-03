@@ -10,8 +10,10 @@ function example() {
   ms.addEventListener('sourceopen', function() {
     console.log('open');
     sb = ms.addSourceBuffer(mimeCodec);
-    fetch('fftest/10154354781949643-7894420.m4v');
-    fetch('fftest/10154354781949643-7895421.m4v');
+    fetch('fftest/check0.mp4');
+    fetch('fftest/check1.mp4');
+    // fetch('fftest/10154354781949643-7894420.m4v');
+    // fetch('fftest/10154354781949643-7895421.m4v');
     // fetch('fftest/10154354781949643-7896422.m4v');
   }, false);
 }
@@ -23,9 +25,7 @@ function fetch(url) {
   xhr.onload = function() {
     console.log('push');
     if (ms.readyState === 'open') {
-      var a = new ArrayBuffer(8);
-      a.length = 80;
-      sb.appendBuffer(a);
+      sb.appendBuffer(xhr.response);
       sb.addEventListener('updateend', function() {
         console.log(sb.buffered);
       });
