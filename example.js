@@ -10,8 +10,9 @@ function example() {
   ms.addEventListener('sourceopen', function() {
     sb = ms.addSourceBuffer(mimeCodec);
     fetch('fftest/10154354781949643-7894420.m4v');
-    fetch('fftest/10154354781949643-7895421.m4v');
-    fetch('fftest/10154354781949643-7896422.m4v');
+    // fetch('fftest/10154354781949643-7895421.m4v');
+    // fetch('fftest/10154354781949643-7896422.m4v');
+    /**
     sb.addEventListener('updateend', function() {
       if (ms.readyState === 'open') {
         debugger;
@@ -19,6 +20,7 @@ function example() {
         sb.appendBuffer(queue.shift());
       }
     });
+    **/
   });
 }
 
@@ -28,9 +30,8 @@ function fetch(url) {
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
     queue.push(xhr.response);
-    if (ms.readyState === 'open') {
-      sb.appendBuffer(queue.shift());
-    }
+    sb.appendBuffer(queue.shift());
+    debugger;
   };
   xhr.send();
 }
