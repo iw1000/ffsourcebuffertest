@@ -23,7 +23,7 @@ function fetch(url) {
     queue.push(xhr.response);
     sb.appendBuffer(xhr.response);
     sb.addEventListener('updateend', function() {
-      console.log(sb.buffered, queue);
+      console.log(sb.buffered, queue[0].byteLength);
     });
   };
   xhr.send();
