@@ -1,5 +1,6 @@
 var ms;
 var sb;
+var video;
 var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
 var queue = [
   'fftest/10154354781949643-init.m4v',
@@ -10,7 +11,7 @@ var queue = [
  
 function example() {
   ms = new MediaSource;
-  var video = document.querySelector('video');
+  video = document.querySelector('video');
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', sourceOpen);
 }
