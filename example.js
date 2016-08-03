@@ -13,9 +13,11 @@ function example() {
     fetch('fftest/10154354781949643-7895421.m4v');
     fetch('fftest/10154354781949643-7896422.m4v');
     sb.addEventListener('updateend', function() {
-      debugger;
-      console.log('updateend', queue);
-      sb.appendBuffer(queue.shift());
+      if (ms.readyState === 'open') {
+        debugger;
+        console.log('updateend', queue);
+        sb.appendBuffer(queue.shift());
+      }
     });
   });
 }
