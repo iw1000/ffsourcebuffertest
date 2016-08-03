@@ -12,9 +12,9 @@ function example() {
     fetch('fftest/10154354781949643-7894420.m4v');
     fetch('fftest/10154354781949643-7895421.m4v');
     fetch('fftest/10154354781949643-7896422.m4v');
-  });
-  sb.addEventListener('updateend', function() {
-    console.log('updateend', queue);
+    sb.addEventListener('updateend', function() {
+      console.log('updateend', queue);
+    });
   });
 }
 
