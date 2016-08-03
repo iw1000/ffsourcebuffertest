@@ -14,7 +14,6 @@ function example() {
     fetch('fftest/10154354781949643-7895421.m4v');
     fetch('fftest/10154354781949643-7896422.m4v');
     sb.addEventListener('update', function() {
-      debugger;
       if (queue.length > 0 && !sb.updating) {
         sb.appendBuffer(queue.shift());
         console.log(sb.buffered);
@@ -28,8 +27,6 @@ function fetch(url) {
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    queue.push(xhr.response);
-    debugger;
     if (sb.updating || queue.length > 0) {
       queue.push(xhr.response);
     } else {
