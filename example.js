@@ -1,6 +1,7 @@
 var ms;
 var sb;
 var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
+var queue = [];
  
 function example() {
   ms = new MediaSource;
@@ -12,6 +13,9 @@ function example() {
     fetch('fftest/10154354781949643-7895421.m4v');
     fetch('fftest/10154354781949643-7896422.m4v');
   });
+  sb.addEventListener('updateend', function() {
+    console.log('updateend', queue);
+  });
 }
 
 function fetch(url) {
@@ -19,8 +23,9 @@ function fetch(url) {
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    sb.appendBuffer(xhr.response);
-    console.log(sb.buffered);
+    queue.push(xhr.response);
+    // sb.appendBuffer(xhr.response);
+    // console.log(sb.buffered);
   };
   xhr.send();
 }
