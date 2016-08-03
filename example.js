@@ -1,12 +1,13 @@
+var ms;
+
 function example() {
   var mimeCodec = 'video/mp4; codecs="avc1.42E01E, mp4a.40.2"';
-  var ms = new MediaSource;
+  ms = new MediaSource;
   var video = document.querySelector('video');
   video.src = URL.createObjectURL(ms);
   ms.addEventListener('sourceopen', function() {
-    debugger;
     fetch('fftest/10154354781949643-7894420.m4v');
-  }.bind(this));
+  });
 }
 
 function fetch(url) {
@@ -14,8 +15,8 @@ function fetch(url) {
   xhr.open('get', url);
   xhr.responseType = 'arraybuffer';
   xhr.onload = function() {
-    console.log(this, xhr.response, xhr.response.length);
-  }.bind(this);
+    console.log(ms, xhr.response, xhr.response.length);
+  };
   xhr.send();
 }
 
