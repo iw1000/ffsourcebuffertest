@@ -25,6 +25,7 @@ function fetch(url) {
   xhr.onload = function() {
     console.log('push');
     if (ms.readyState === 'open') {
+      console.log(xhr.response, xhr.response.byteLength);
       sb.appendBuffer(xhr.response);
       sb.addEventListener('updateend', function() {
         console.log(sb.buffered);
